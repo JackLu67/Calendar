@@ -88,7 +88,8 @@ export default {
       return this.date.getMonth()
     },
     selectedMonthName () {
-      return this.date.getMonthName()
+      // return this.date.getMonthName()
+      return this.date.getMonth()
     },
     selectedYear () {
       return this.date.getFullYear()
@@ -103,13 +104,13 @@ export default {
     },
     generateWeekdayNames (firstDayOfWeek = 1) {
       let weekdays = [
-        'Sunday',
-        'Monday',
-        'Tuesday',
-        'Wednesday',
-        'Thursday',
-        'Friday',
-        'Saturday'
+        '日',
+        '一',
+        '二',
+        '三',
+        '四',
+        '五',
+        '六'
       ]
       for (let i = 2; i <= firstDayOfWeek; i++) {
         let first = weekdays.shift()
