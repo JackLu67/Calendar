@@ -1,23 +1,31 @@
 @import 'variables'
 
 #sweetCalendar
-
+  font-family: 'impact';
   .container
     display: grid
     grid-template-rows: 40px 1fr
 
     .header
+      display: flex
       align-items: center
-      display: grid
-      grid-column-gap: 5px
-      grid-template-columns: 50px 1fr 50px
-
+      justify-content: flex-end;
+      padding-right: 16px;
+      img
+        vertical-align: middle
+      .select
+        margin-right: 12px
+        width: 30px
+        height: 20px
+        text-align: center
+        line-height: 20px
+        vertical-align: middle
       .month
         justify-self: center
-
+        padding: 0 13px 0 13px
       .left-arrow
         justify-self: end
-
+        font-size: 14px
         span
           cursor: pointer
 
@@ -67,8 +75,8 @@
             color: $today-color
 
           &.off-day
-            background-color: $off-day-background-color
-            font-weight: bold
+            color: #9f9f9f
+            font-weight: normal
 
           span
             font-size: 14px
