@@ -2,7 +2,7 @@
   <div id="sweetCalendar">
     <div class="container calendar">
       <div class="header">
-        <div
+        <!-- <div
           class="left-arrow"
           @click="prevMonth"
         >
@@ -14,7 +14,12 @@
           @click="nextMonth"
         >
           <span>&gt;</span>
-        </div>
+        </div> -->
+        <span class="select" :class="{active: year}" @click="select(1)">年</span>
+        <span class="select" :class="{active: month}" @click="select">月</span>
+        <img src="../assets/left.png" alt="" width="18" height="20" @click="prevMonth">
+        <div class="month">{{ selectedYear }}.{{ selectedMonthName }}</div>
+        <img src="../assets/right.png" alt="" width="18" height="20" @click="nextMonth">
       </div>
       <div class="body">
         <div
@@ -69,7 +74,9 @@ export default {
     return {
       today: new DateTime(),
       date: null,
-      weekdays: null
+      weekdays: null,
+      year: false,
+      month: true
     }
   },
   computed: {
@@ -97,10 +104,18 @@ export default {
   },
   methods: {
     prevMonth () {
-      this.date = new DateTime(this.selectedYear, this.selectedMonth - 1, 1)
+      if (this.year) {
+        this.date = new DateTime(this.selectedYear - 1, this.selectedMonth, 1)
+      } else {
+        this.date = new DateTime(this.selectedYear, this.selectedMonth - 1, 1)
+      }
     },
     nextMonth () {
-      this.date = new DateTime(this.selectedYear, this.selectedMonth + 1, 1)
+      if (this.year) {
+        this.date = new DateTime(this.selectedYear + 1, this.selectedMonth, 1)
+      } else {
+        this.date = new DateTime(this.selectedYear, this.selectedMonth + 1, 1)
+      }
     },
     generateWeekdayNames (firstDayOfWeek = 1) {
       let weekdays = [
@@ -158,6 +173,15 @@ export default {
     },
     goToday () {
       this.date = this.today
+    },
+    select (n) {
+      if (n === 1) {
+        this.year = true
+        this.month = false
+      } else {
+        this.year = false
+        this.month = true
+      }
     }
   },
   props: {
@@ -197,4 +221,8 @@ export default {
 
 <style lang="sass" scoped>
 @import '../styles/index.sass'
+.active
+  background-color: #4c3ae3
+  color: #fff
+  border-radius: 7px
 </style>
